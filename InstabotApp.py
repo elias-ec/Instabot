@@ -85,6 +85,7 @@ def startBot():
                     search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
                     time.sleep(randrange(3, 8))
                     i = i + 1
+                    print(i)
 
 
 

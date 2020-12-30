@@ -70,7 +70,7 @@ try:
 
 
 finally:
-    print("Finished")
+    print("Finished!!!")
     time.sleep(500)
     driver.quit()
 
