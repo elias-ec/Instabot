@@ -1,3 +1,6 @@
+"""
+@author: Elias Eckermann
+"""
 from tkinter import *  # --> Import everything from tkinter für gui
 ##Bot:
 from selenium import webdriver
@@ -10,6 +13,8 @@ import time
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
+
+
 ###
 
 ##########################################################################################################
@@ -56,7 +61,8 @@ def startBot():
                 search.send_keys(Keys.RETURN)
                 time.sleep(3)
                 search.send_keys(Keys.RETURN)
-                time.sleep(randrange(2, 5)) # im suchfeld wird gesucht und durch zweimalige bestätigung durch return das Ergebniss ausgewählt
+                time.sleep(randrange(2,
+                                     5))  # im suchfeld wird gesucht und durch zweimalige bestätigung durch return das Ergebniss ausgewählt
                 if followVar == True:
                     element = WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located(
@@ -72,20 +78,50 @@ def startBot():
                 element.click()  # erster beitrag wird ausgewählt
                 time.sleep(6)
 
+
                 i = 0
                 while i < int(eam.get()):  ####################################Amount of Likes
-                    element = WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located(
-                            (By.CLASS_NAME, "fr66n"))
-                    )
-                    element.click()  # Beirag geliked
-                    time.sleep(randrange(1, 5))
+                    try:
+                        element = driver.find_element_by_class_name("fr66n")
+                        element.click()
+                        time.sleep(randrange(1, 5)) # Beitrag geliked
 
-                    search = driver.find_element_by_tag_name("body")
-                    search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
-                    time.sleep(randrange(3, 8))
+                        search = driver.find_element_by_tag_name("body")
+                        search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                        time.sleep(randrange(2, 13))
+
+                        if i % 100 == 0:  # Wenn sich die Anzahl der Likes durch 100 teilen lässt...
+                            print("sleeping...")
+                            time.sleep(randrange(15, 40))  # ...wartet der Bot etwas länger
+
+
+                    except:
+                        try:
+                            element = driver.find_element_by_class_name("aOOlW   HoLwm ")
+                            element.click()  # Kästchen mit Try Again later wird bestätigt
+                            time.sleep(randrange(1, 7))
+
+                            element = driver.find_element_by_class_name("fr66n")
+                            element.click() # geliked
+                            time.sleep(randrange(1, 5))
+
+                            search = driver.find_element_by_tag_name("body")
+                            search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                            time.sleep(randrange(2, 13))
+
+                            if i % 100 == 0:  # Wenn sich die Anzahl der Likes durch 100 teilen lässt...
+                                print("sleeping...")
+                                time.sleep(randrange(15, 40))  # ...wartet der Bot etwas länger
+                        except:
+                            search = driver.find_element_by_tag_name("body")
+                            search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                            time.sleep(randrange(2, 13))
+                            print("Ein Element nicht gefunden!!!")
+
                     i = i + 1
                     print(i)
+
+
 
 
 
@@ -94,6 +130,7 @@ def startBot():
         time.sleep(10)
         driver.quit()
         quit()
+
 
 ##########################################################################################################
 # ende Bot  ! ! !
@@ -136,6 +173,7 @@ eam.grid(row=4, column=1)
 l4 = Label(root, text="Follow?")
 l4.grid(row=5, column=0)
 
+
 def follow():
     global followVar
     if followVar == False:
@@ -144,6 +182,7 @@ def follow():
     else:
         followVar = False
         followbt.configure(bg='gray')
+
 
 followbt = Button(root, text="Yes", width=12, command=follow, bg='gray')
 followbt.grid(row=5, column=1)
@@ -165,7 +204,9 @@ def startClick():
     else:
         print("go")
         gowindow = Tk()
-        l6 = Label(gowindow, text="Bot starts. You are responsible for the use of this software. Please confirm with Ok.", fg="red")
+        l6 = Label(gowindow,
+                   text="Bot starts. You are responsible for the use of this software. Please confirm with Ok.",
+                   fg="red")
         l6.grid(row=1, column=1)
 
         gobt = Button(gowindow, text="Ok", width=12, command=startBot)
@@ -184,6 +225,3 @@ cancelbt = Button(root, text="Cancel", width=12, command=cancelClick)
 cancelbt.grid(row=6, column=1)
 
 root.mainloop()  # ende des windows
-
-
-
