@@ -14,9 +14,6 @@ import time
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-
-###
-
 ##########################################################################################################
 # start Bot ! ! !
 def startBot():
@@ -27,15 +24,15 @@ def startBot():
     try:
         element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div/div/div[2]/button[1]"))
-        )  # wir warten 10 sekunden ob das Element gefunden wird
+        )  # waiting 10 sec until element was found
         element.click()
 
         search = driver.find_element_by_name("username")
-        search.send_keys(eun.get())  ##########################################username######
-        time.sleep(randrange(1, 6))  # wir warten zufällige sekunden 1-6
+        search.send_keys(eun.get())  # U S E R N A M E
+        time.sleep(randrange(1, 6))  # waiting random time (1-6sec)
 
         search = driver.find_element_by_name("password")
-        search.send_keys(epw.get())  ##########################################password######
+        search.send_keys(epw.get())  # P A S S W O R D
         search.send_keys(Keys.RETURN)
         time.sleep(5)
 
@@ -44,7 +41,7 @@ def startBot():
                 EC.presence_of_element_located(
                     (By.CLASS_NAME, "cmbtv"))
             )
-            element.click()  # Login Info wird nicht gespeichert
+            element.click()
             time.sleep(3)
         finally:
             try:
@@ -52,21 +49,21 @@ def startBot():
                     EC.presence_of_element_located(
                         (By.XPATH, "/html/body/div[4]/div/div/div/div[3]/button[2]"))
                 )
-                element.click()  # Notifications werden abgelehnt
+                element.click()  # reject Notifications
                 time.sleep(3)
             finally:
                 search = driver.find_element_by_xpath("/html/body/div[1]/section/nav/div[2]/div/div/div[2]/input")
-                search.send_keys(ehu.get())  ####################################Hashtak or user
+                search.send_keys(ehu.get())  # H A S H T A G   O R   U S E R
                 time.sleep(1)
                 search.send_keys(Keys.RETURN)
                 time.sleep(3)
                 search.send_keys(Keys.RETURN)
                 time.sleep(randrange(2,
-                                     5))  # im suchfeld wird gesucht und durch zweimalige bestätigung durch return das Ergebniss ausgewählt
+                                     5))  # Bot searches for account or user
                 if followVar == True:
                     element = WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located(
-                            (By.NAME, "Follow"))
+                            (By.XPATH, '//button[text()="Follow"]'))
                     )
                     element.click()
                 time.sleep(randrange(1, 5))
@@ -75,46 +72,46 @@ def startBot():
                     EC.presence_of_element_located(
                         (By.CLASS_NAME, "eLAPa"))
                 )
-                element.click()  # erster beitrag wird ausgewählt
+                element.click()  # select first picture
                 time.sleep(6)
 
 
                 i = 0
-                while i < int(eam.get()):  ####################################Amount of Likes
+                while i < int(eam.get()):  # A M O U N T   O F   L I K E S
                     try:
                         element = driver.find_element_by_class_name("fr66n")
                         element.click()
-                        time.sleep(randrange(1, 5)) # Beitrag geliked
+                        time.sleep(randrange(1, 5)) # picture liked
 
                         search = driver.find_element_by_tag_name("body")
-                        search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                        search.send_keys(Keys.ARROW_RIGHT)  # next picture
                         time.sleep(randrange(2, 13))
 
-                        if i % 100 == 0:  # Wenn sich die Anzahl der Likes durch 100 teilen lässt...
+                        if i % 100 == 0:  # If Likes can be divided by 100...
                             print("sleeping...")
-                            time.sleep(randrange(15, 40))  # ...wartet der Bot etwas länger
+                            time.sleep(randrange(15, 40))  # ... Bot waits longer
 
 
                     except:
                         try:
                             element = driver.find_element_by_class_name("aOOlW   HoLwm ")
-                            element.click()  # Kästchen mit Try Again later wird bestätigt
+                            element.click()  # Bot confirms "Try Again"
                             time.sleep(randrange(1, 7))
 
                             element = driver.find_element_by_class_name("fr66n")
-                            element.click() # geliked
+                            element.click() # picture liked
                             time.sleep(randrange(1, 5))
 
                             search = driver.find_element_by_tag_name("body")
-                            search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                            search.send_keys(Keys.ARROW_RIGHT)  # next picture
                             time.sleep(randrange(2, 13))
 
-                            if i % 100 == 0:  # Wenn sich die Anzahl der Likes durch 100 teilen lässt...
+                            if i % 100 == 0:  # If likes can be divided by 100...
                                 print("sleeping...")
-                                time.sleep(randrange(15, 40))  # ...wartet der Bot etwas länger
+                                time.sleep(randrange(15, 40))  # ...Bot waits longer
                         except:
                             search = driver.find_element_by_tag_name("body")
-                            search.send_keys(Keys.ARROW_RIGHT)  # nächster beitrag
+                            search.send_keys(Keys.ARROW_RIGHT)  # next picture
                             time.sleep(randrange(2, 13))
                             print("Ein Element nicht gefunden!!!")
 
@@ -135,6 +132,8 @@ def startBot():
 ##########################################################################################################
 # ende Bot  ! ! !
 
+
+# GUI:
 followVar = False
 
 root = Tk()
