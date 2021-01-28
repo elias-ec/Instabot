@@ -9,3 +9,5 @@ You also need Selenium, which can be easily installed with the command "pip inst
 
 When InstabotApp.py is executed, a browser window opens and a GUI in which the user's own user name and password can be entered, as well as the desired account or hashtag and the number of likes.
 After confirming twice with "Ok", the bot runs.
+
+@author: Elias Eckermann
